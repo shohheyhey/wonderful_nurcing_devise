@@ -32,4 +32,12 @@ module WonderfulNurcingDevise
     # Don't generate system test files.
     config.generators.system_tests = nil
   end
+  config.generators do |g|
+    g.test_flamework :rspec
+      view_spec: false,
+      routing_specs: false,
+      helper_specs: false,
+      controller_specs: false,
+      request_specs: true
+  end
 end
