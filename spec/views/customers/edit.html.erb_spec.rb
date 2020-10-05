@@ -1,23 +1,22 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "customers/edit", type: :view do
-  before(:each) do
+  before do
     @customer = assign(:customer, Customer.create!(
-      user: nil,
-      category: nil,
-      name: "MyString",
-      age: 1,
-      kaigodo: 1,
-      medical_history: "MyText",
-      discription: "MyText"
-    ))
+                                    user: nil,
+                                    category: nil,
+                                    name: "MyString",
+                                    age: 1,
+                                    kaigodo: 1,
+                                    medical_history: "MyText",
+                                    discription: "MyText",
+                                  ))
   end
 
   it "renders the edit customer form" do
     render
 
     assert_select "form[action=?][method=?]", customer_path(@customer), "post" do
-
       assert_select "input[name=?]", "customer[user_id]"
 
       assert_select "input[name=?]", "customer[category_id]"

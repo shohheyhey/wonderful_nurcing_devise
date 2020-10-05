@@ -1,16 +1,16 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "customers/show", type: :view do
-  before(:each) do
+  before do
     @customer = assign(:customer, Customer.create!(
-      user: nil,
-      category: nil,
-      name: "Name",
-      age: 2,
-      kaigodo: 3,
-      medical_history: "MyText",
-      discription: "MyText"
-    ))
+                                    user: nil,
+                                    category: nil,
+                                    name: "Name",
+                                    age: 2,
+                                    kaigodo: 3,
+                                    medical_history: "MyText",
+                                    discription: "MyText",
+                                  ))
   end
 
   it "renders attributes in <p>" do

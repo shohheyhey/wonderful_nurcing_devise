@@ -1,7 +1,7 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "customers/index", type: :view do
-  before(:each) do
+  before do
     assign(:customers, [
       Customer.create!(
         user: nil,
@@ -10,7 +10,7 @@ RSpec.describe "customers/index", type: :view do
         age: 2,
         kaigodo: 3,
         medical_history: "MyText",
-        discription: "MyText"
+        discription: "MyText",
       ),
       Customer.create!(
         user: nil,
@@ -19,8 +19,8 @@ RSpec.describe "customers/index", type: :view do
         age: 2,
         kaigodo: 3,
         medical_history: "MyText",
-        discription: "MyText"
-      )
+        discription: "MyText",
+      ),
     ])
   end
 

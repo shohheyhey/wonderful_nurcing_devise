@@ -1,23 +1,22 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "customers/new", type: :view do
-  before(:each) do
+  before do
     assign(:customer, Customer.new(
-      user: nil,
-      category: nil,
-      name: "MyString",
-      age: 1,
-      kaigodo: 1,
-      medical_history: "MyText",
-      discription: "MyText"
-    ))
+                        user: nil,
+                        category: nil,
+                        name: "MyString",
+                        age: 1,
+                        kaigodo: 1,
+                        medical_history: "MyText",
+                        discription: "MyText",
+                      ))
   end
 
   it "renders new customer form" do
     render
 
     assert_select "form[action=?][method=?]", customers_path, "post" do
-
       assert_select "input[name=?]", "customer[user_id]"
 
       assert_select "input[name=?]", "customer[category_id]"
