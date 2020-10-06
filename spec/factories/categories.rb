@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :category do
-    user { nil }
-    name { "MyString" }
+    id{Faker::Number.number}
+    user_id { nil }
+    name { Faker::Name.name }
   end
 end

@@ -1,26 +1,30 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "customers/index", type: :view do
-  before(:each) do
+  before do
+    @user = User.create!(email: Faker::Internet.email, password: Faker::Internet.password)
+    @category = Category.create!(user_id: @user.id)
+    sign_in @user
+
     assign(:customers, [
       Customer.create!(
-        user: nil,
-        category: nil,
+        user_id: @user.id,
+        category_id: @category.id ,
         name: "Name",
         age: 2,
         kaigodo: 3,
         medical_history: "MyText",
-        discription: "MyText"
+        discription: "MyText",
       ),
       Customer.create!(
-        user: nil,
-        category: nil,
+        user_id: @user.id,
+        category_id: @category.id,
         name: "Name",
         age: 2,
         kaigodo: 3,
         medical_history: "MyText",
-        discription: "MyText"
-      )
+        discription: "MyText",
+      ),
     ])
   end
 
@@ -31,7 +35,7 @@ RSpec.describe "customers/index", type: :view do
     assert_select "tr>td", text: "Name".to_s, count: 2
     assert_select "tr>td", text: 2.to_s, count: 2
     assert_select "tr>td", text: 3.to_s, count: 2
-    assert_select "tr>td", text: "MyText".to_s, count: 2
-    assert_select "tr>td", text: "MyText".to_s, count: 2
+    assert_select "tr>td", text: "MyText".to_s, count: 4
+    assert_select "tr>td", text: "MyText".to_s, count: 4
   end
 end

@@ -33,11 +33,11 @@ module WonderfulNurcingDevise
     # config.generators.system_tests = nil
     config.generators do |g|
       g.test_flamework :rspec,
-        view_spec: false,
-        routing_specs: false,
-        helper_specs: false,
-        controller_specs: false,
-        request_specs: true
+                       view_spec: false,
+                       routing_specs: false,
+                       helper_specs: false,
+                       controller_specs: false,
+                       request_specs: true
     end
   end
 end

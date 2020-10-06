@@ -1,19 +1,21 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "customers/show", type: :view do
-  before(:each) do
+  before do
+    @user = FactoryBot.create(:user)
+    @category = FactoryBot.create(:category, user_id: @user.id)
     @customer = assign(:customer, Customer.create!(
-      user: nil,
-      category: nil,
+      user_id: @user.id,
+      category_id: @category.id,
       name: "Name",
       age: 2,
       kaigodo: 3,
       medical_history: "MyText",
-      discription: "MyText"
-    ))
-  end
+      discription: "MyText",
+      ))
+    end
 
-  it "renders attributes in <p>" do
+    fit "renders attributes in <p>" do
     render
     expect(rendered).to match(//)
     expect(rendered).to match(//)
