@@ -2,9 +2,11 @@ require 'rails_helper'
 
 RSpec.describe "services/show", type: :view do
   before(:each) do
+    @user = create(:user)
+    @category = create(:category, user_id: @user.id)
     @service = assign(:service, Service.create!(
-      user: nil,
-      category: nil
+      user_id: @user.id,
+      category_id: @category.id
     ))
   end
 
