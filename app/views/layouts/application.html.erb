@@ -12,6 +12,10 @@
   <body>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
+    <%= link_to "トップページ", customers_path%>
+    <%= link_to "User を編集", edit_user_registration_path, method: :get %><!--ユーザー情報を編集する-->
+    <%= link_to "Service 一覧", services_path %>
+    <%= link_to "ログアウト", destroy_user_session_path, method: :delete %> <!-- ログアウトをする -->
     <%= yield %>
   </body>
 </html>

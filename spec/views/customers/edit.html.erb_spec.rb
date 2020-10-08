@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe "customers/edit", type: :view do
   before do
     @user = User.create!(email: Faker::Internet.email, password: Faker::Internet.password(min_length: 6))
-    @category = Category.create!(id: 1, user_id: @user.id)
+    @category = create(:category)
     # binding.pry
     @customer = assign(:customer, Customer.create!(
                                     user_id: @user.id,

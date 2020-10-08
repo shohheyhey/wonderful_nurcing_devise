@@ -1,4 +1,5 @@
 class ServicesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_service, only: [:show, :edit, :update, :destroy]
 
   # GET /services
@@ -10,6 +11,7 @@ class ServicesController < ApplicationController
   # GET /services/1
   # GET /services/1.json
   def show
+    @service = Service.find(params[:id])
   end
 
   # GET /services/new
@@ -25,9 +27,11 @@ class ServicesController < ApplicationController
   # POST /services.json
   def create
     @service = Service.new(service_params)
-
+    @user = current_user
+    @service.user_id = @user.id
     respond_to do |format|
       if @service.save
+        @service.user_id = @user.id
         format.html { redirect_to @service, notice: "Service was successfully created." }
         format.json { render :show, status: :created, location: @service }
       else
@@ -70,6 +74,6 @@ class ServicesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def service_params
-      params.require(:service).permit(:user_id, :category_id)
+      params.require(:service).permit(:category_id, :name, :fee)
     end
 end

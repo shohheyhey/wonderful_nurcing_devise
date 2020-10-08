@@ -10,17 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_06_223120) do
+ActiveRecord::Schema.define(version: 2020_10_08_085535) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "categories", force: :cascade do |t|
-    t.bigint "user_id", null: false
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_categories_on_user_id"
   end
 
   create_table "customers", force: :cascade do |t|
@@ -41,10 +39,21 @@ ActiveRecord::Schema.define(version: 2020_10_06_223120) do
   create_table "services", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "category_id", null: false
+    t.string "name"
+    t.integer "fee"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["category_id"], name: "index_services_on_category_id"
     t.index ["user_id"], name: "index_services_on_user_id"
+  end
+
+  create_table "services_customers", force: :cascade do |t|
+    t.bigint "service_id", null: false
+    t.bigint "customer_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_id"], name: "index_services_customers_on_customer_id"
+    t.index ["service_id"], name: "index_services_customers_on_service_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -60,9 +69,10 @@ ActiveRecord::Schema.define(version: 2020_10_06_223120) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "categories", "users"
   add_foreign_key "customers", "categories"
   add_foreign_key "customers", "users"
   add_foreign_key "services", "categories"
   add_foreign_key "services", "users"
+  add_foreign_key "services_customers", "customers"
+  add_foreign_key "services_customers", "services"
 end
