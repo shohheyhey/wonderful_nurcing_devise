@@ -40,7 +40,7 @@ RSpec.describe "/services", type: :request do
   end
 
   describe "GET /new" do
-    it "renders a successful response" do
+    pending "renders a successful response" do
       get new_service_url
       expect(response).to be_successful
     end

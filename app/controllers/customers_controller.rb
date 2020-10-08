@@ -10,6 +10,7 @@ class CustomersController < ApplicationController
   # GET /customers/1
   # GET /customers/1.json
   def show
+    @category = Category.find(@customer.category_id)
   end
 
   # GET /customers/new
@@ -26,8 +27,6 @@ class CustomersController < ApplicationController
   def create
     @customer = Customer.new(customer_params)
     @customer.user_id = current_user.id
-    # @customer.category_id = current_user.cutegory_id
-    # binding.pry
     respond_to do |format|
       if @customer.save
         format.html { redirect_to @customer, notice: "Customer was successfully created." }

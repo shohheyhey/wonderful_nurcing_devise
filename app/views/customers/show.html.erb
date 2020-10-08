@@ -1,13 +1,9 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>User:</strong>
-  <%= @customer.user_id %>
-</p>
 
 <p>
   <strong>Category:</strong>
-  <%= @customer.category_id %>
+  <%= @category.name %>
 </p>
 
 <p>
@@ -17,7 +13,7 @@
 
 <p>
   <strong>Age:</strong>
-  <%= @customer.age %>
+  <%= (Date.today.strftime('%Y%m%d').to_i - @customer.birthday.strftime('%Y%m%d').to_i) / 10000 %>
 </p>
 
 <p>
@@ -37,6 +33,11 @@
 
 <p>
   <strong>Discription:</strong>
+  <%= @customer.discription %>
+</p>
+
+<p>
+  <strong>Servise in use:</strong>
   <%= @customer.discription %>
 </p>
 

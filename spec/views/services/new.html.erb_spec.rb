@@ -8,7 +8,7 @@ RSpec.describe "services/new", type: :view do
     ))
   end
 
-  it "renders new service form" do
+  pending "renders new service form" do
     render
 
     assert_select "form[action=?][method=?]", services_path, "post" do

@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe "customers/show", type: :view do
   before do
     @user = FactoryBot.create(:user)
-    @category = FactoryBot.create(:category, user_id: @user.id)
+    @category = create(:category)
     @customer = assign(:customer, Customer.create!(
       user_id: @user.id,
       category_id: @category.id,
@@ -15,7 +15,7 @@ RSpec.describe "customers/show", type: :view do
       ))
     end
 
-    fit "renders attributes in <p>" do
+    pending "renders attributes in <p>" do
     render
     expect(rendered).to match(//)
     expect(rendered).to match(//)
