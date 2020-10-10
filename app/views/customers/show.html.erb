@@ -38,7 +38,9 @@
 
 <p>
   <strong>Servise in use:</strong>
-  <%= @customer.discription %>
+  <% @customer.services_customers.each do |sc| %>
+    <%= sc.service.name%>,
+  <% end %>
 </p>
 
 <%= link_to 'Edit', edit_customer_path(@customer) %> |

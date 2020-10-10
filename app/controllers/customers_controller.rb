@@ -1,4 +1,5 @@
 class CustomersController < ApplicationController
+  before_action :authenticate_user!, only: [:index, :show, :edit, :new, :create, :update]
   before_action :set_customer, only: [:show, :edit, :update, :destroy]
 
   # GET /customers
@@ -29,6 +30,9 @@ class CustomersController < ApplicationController
     @customer.user_id = current_user.id
     respond_to do |format|
       if @customer.save
+        service_params["service_id"].each do |i|
+          ServicesCustomer.create!(customer_id: @customer.id, service_id: i.to_i)
+        end
         format.html { redirect_to @customer, notice: "Customer was successfully created." }
         format.json { render :show, status: :created, location: @customer }
       else
@@ -72,5 +76,9 @@ class CustomersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def customer_params
       params.require(:customer).permit(:user_id, :category_id, :name, :age, :birthday, :kaigodo, :medical_history, :discription)
+    end
+
+    def service_params
+      params.require(:service_customer).permit(service_id: [])
     end
 end

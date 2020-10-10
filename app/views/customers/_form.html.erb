@@ -19,7 +19,14 @@
     <div class="field">
     <%= form.label :category_id %>
     <%= form.collection_select :category_id, Category.all, :id, :name, include_blank: "選択してください" %>
-  </div>
+    </div>
+
+    <div class="field">
+    <%= fields_for :service_customer, (@service_customer) do |sc| %>
+      <%= sc.label :service_id %>
+      <%= sc.collection_check_boxes :service_id, Service.all, :id, :name, include_hidden: false  %>
+    <% end %>
+    </div>
 
 
   <div class="field">

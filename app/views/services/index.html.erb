@@ -14,7 +14,7 @@
 
   <tbody>
     <% @services.each do |service| %>
-    <% @category = Category.find(service.id) %>
+    <% @category = Category.find(service.category_id) %>
       <tr>
         <td><%= service.name %></td>
         <td><%= service.fee%></td>
