@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 2020_10_08_085535) do
   end
 
   create_table "services", force: :cascade do |t|
-    t.bigint "user_id", null: false
+    t.bigint "user_id"
     t.bigint "category_id", null: false
     t.string "name"
     t.integer "fee"
@@ -48,8 +48,8 @@ ActiveRecord::Schema.define(version: 2020_10_08_085535) do
   end
 
   create_table "services_customers", force: :cascade do |t|
-    t.bigint "service_id", null: false
-    t.bigint "customer_id", null: false
+    t.bigint "service_id"
+    t.bigint "customer_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["customer_id"], name: "index_services_customers_on_customer_id"

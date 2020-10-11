@@ -38,8 +38,10 @@
 
 <p>
   <strong>Servise in use:</strong>
-  <% @customer.services_customers.each do |sc| %>
-    <%= sc.service.name%>,
+  <% if @customer.services_customers.exists?%>
+    <% @customer.services_customers.each do |sc| %>
+      <%= sc.service.name%>
+  <% end %>
   <% end %>
 </p>
 
