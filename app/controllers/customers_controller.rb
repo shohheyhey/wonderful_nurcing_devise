@@ -5,7 +5,8 @@ class CustomersController < ApplicationController
   # GET /customers
   # GET /customers.json
   def index
-    @customers = Customer.all
+    @customers = Customer.where(user_id: current_user.id)
+    # binding.pry
   end
 
   # GET /customers/1
@@ -84,7 +85,8 @@ class CustomersController < ApplicationController
     end
 
     def service_params
-      if params["service_customer"] == nil?
+      nil_var = params["service_customer"]
+      if nil_var.nil?
         ["0"]
       else
         params.require(:service_customer).permit(service_id: [])
