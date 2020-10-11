@@ -33,12 +33,12 @@ class CustomersController < ApplicationController
           service_params["service_id"].each do |i|
             ServicesCustomer.create!(customer_id: @customer.id, service_id: i.to_i)
           end
-            format.html { redirect_to @customer, notice: "Customer was successfully created." }
-            format.json { render :show, status: :created, location: @customer }
-          else
-            format.html { render :new }
-            format.json { render json: @customer.errors, status: :unprocessable_entity }
-          end
+          format.html { redirect_to @customer, notice: "Customer was successfully created." }
+          format.json { render :show, status: :created, location: @customer }
+        else
+          format.html { render :new }
+          format.json { render json: @customer.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
