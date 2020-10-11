@@ -30,9 +30,13 @@ class CustomersController < ApplicationController
     respond_to do |format|
       ActiveRecord::Base.transaction do
         if @customer.save
+          if service_params == ["0"]
+            ServicesCustomer.create!(customer_id: @customer.id, service_id: nil)
+          else
           service_params["service_id"].each do |i|
             ServicesCustomer.create!(customer_id: @customer.id, service_id: i.to_i)
           end
+        end
           format.html { redirect_to @customer, notice: "Customer was successfully created." }
           format.json { render :show, status: :created, location: @customer }
         else
@@ -80,6 +84,10 @@ class CustomersController < ApplicationController
     end
 
     def service_params
-      params.require(:service_customer).permit(service_id: [])
+      if params["service_customer"] == nil
+        ["0"]
+      else
+        params.require(:service_customer).permit(service_id: [])
+      end
     end
 end
