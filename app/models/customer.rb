@@ -4,4 +4,6 @@ class Customer < ApplicationRecord
   accepts_nested_attributes_for :services_customers
   belongs_to :user
   belongs_to :category
+
+  mount_uploader :image, ImageUploader
 end

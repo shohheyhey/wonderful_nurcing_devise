@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :category do
-    id{Faker::Number.number}
+    id{ rand(1..3)}
     name { Faker::Name.name }
   end
 end
