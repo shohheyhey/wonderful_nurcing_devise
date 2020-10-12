@@ -12,7 +12,7 @@ require "rails_helper"
 # of tools you can use to make these specs even more expressive, but we're
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
-RSpec.describe "Api::V1::Customers", type: :request do
+RSpec.describe "Customers", type: :request do
   describe "GET /index" do
     subject{get(customers_path)}
       let(:user){create(:user)}
@@ -22,27 +22,37 @@ RSpec.describe "Api::V1::Customers", type: :request do
       end
     fit "current_userのお客様が一覧が取得できる。" do
       subject
-      # binding.pry
       expect(customer1.user_id).to eq user.id
       expect(customer1.category_id).to eq category.id
+      expect(customer2.user_id).to eq user.id
+      expect(customer2.category_id).to eq category.id
+      expect(customer3.user_id).to eq user.id
+      expect(customer3.category_id).to eq category.id
     end
   end
 
   describe "GET /show" do
-    pending "renders a successful response" do
-      customer = Customer.create! valid_attributes
-      get customer_url(customer)
-      expect(response).to be_successful
+    subject{get(customer_path(customer.id))}
+    let(:user){create(:user)}
+    let(:category){create(:category)}
+    let(:customer_id){Faker::Number::number}
+    let(:customer){create(:customer, id: customer_id, user_id: user.id, category_id: category.id)}
+    fit "指定したIDのお客様を表示する" do
+      subject
+      current_user = user
+      expect(customer.id).to eq customer_id
+      expect(customer.user_id).to eq current_user.id
     end
   end
 
-  describe "GET /new" do
-    let(:user){create(:user)}
+  describe "POST /new" do
+    subject{post(customers_path, params: params)}
+    let(:current_user){create(:user)}
     let(:category){create(:category)}
-    pending "renders a successful response" do
-      customer = Customer.create!(user_id: user.id, category_id: category.id)
-      get new_customer_path(customer)
-      expect(response).to be_successful
+    let(:params){{customer: attributes_for(:customer, user_id: current_user.id)}}
+    pending "お客様が追加される" do
+      expect{subject}.to change{Customer.where(user_id: current_user.id).count}.by(1)
+      expect(Customer.where(user_id: current_user.id).count).to eq 1
     end
   end
 
