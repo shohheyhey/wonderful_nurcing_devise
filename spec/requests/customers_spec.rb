@@ -12,27 +12,24 @@ require "rails_helper"
 # of tools you can use to make these specs even more expressive, but we're
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
-RSpec.describe "/customers", type: :request do
-  # Customer. As you add validations to Customer, be sure to
-  # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
-
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
-
+RSpec.describe "Api::V1::Customers", type: :request do
   describe "GET /index" do
-    it "renders a successful response" do
-      Customer.create! valid_attributes
-      get customers_url
-      expect(response).to be_successful
+    subject{get(customers_path)}
+      let(:user){create(:user)}
+      let(:category){create(:category)}
+      for i in 1..3 do
+        let("customer#{i}"){create(:customer, user_id: user.id, category_id: category.id)}
+      end
+    fit "current_userのお客様が一覧が取得できる。" do
+      subject
+      # binding.pry
+      expect(customer1.user_id).to eq user.id
+      expect(customer1.category_id).to eq category.id
     end
   end
 
   describe "GET /show" do
-    it "renders a successful response" do
+    pending "renders a successful response" do
       customer = Customer.create! valid_attributes
       get customer_url(customer)
       expect(response).to be_successful
@@ -50,7 +47,7 @@ RSpec.describe "/customers", type: :request do
   end
 
   describe "GET /edit" do
-    it "render a successful response" do
+    pending "render a successful response" do
       customer = Customer.create! valid_attributes
       get edit_customer_url(customer)
       expect(response).to be_successful
@@ -59,26 +56,26 @@ RSpec.describe "/customers", type: :request do
 
   describe "POST /create" do
     context "with valid parameters" do
-      it "creates a new Customer" do
+      pending "creates a new Customer" do
         expect {
           post customers_url, params: { customer: valid_attributes }
         }.to change { Customer.count }.by(1)
       end
 
-      it "redirects to the created customer" do
+      pending "redirects to the created customer" do
         post customers_url, params: { customer: valid_attributes }
         expect(response).to redirect_to(customer_url(Customer.last))
       end
     end
 
     context "with invalid parameters" do
-      it "does not create a new Customer" do
+      pending "does not create a new Customer" do
         expect {
           post customers_url, params: { customer: invalid_attributes }
         }.to change { Customer.count }.by(0)
       end
 
-      it "renders a successful response (i.e. to display the 'new' template)" do
+      pending "renders a successful response (i.e. to display the 'new' template)" do
         post customers_url, params: { customer: invalid_attributes }
         expect(response).to be_successful
       end
@@ -86,7 +83,7 @@ RSpec.describe "/customers", type: :request do
   end
 
   describe "PATCH /update" do
-    context "with valid parameters" do
+    pending "with valid parameters" do
       let(:new_attributes) {
         skip("Add a hash of attributes valid for your model")
       }
@@ -106,7 +103,7 @@ RSpec.describe "/customers", type: :request do
       end
     end
 
-    context "with invalid parameters" do
+    pending "with invalid parameters" do
       it "renders a successful response (i.e. to display the 'edit' template)" do
         customer = Customer.create! valid_attributes
         patch customer_url(customer), params: { customer: invalid_attributes }
@@ -115,7 +112,7 @@ RSpec.describe "/customers", type: :request do
     end
   end
 
-  describe "DELETE /destroy" do
+  pending "DELETE /destroy" do
     it "destroys the requested customer" do
       customer = Customer.create! valid_attributes
       expect {

@@ -1,5 +1,11 @@
 <p id="notice"><%= notice %></p>
 
+<p>
+<% if @customer.image?%>
+  <%=image_tag @customer.image.url %>
+<% end %>
+</p>
+
 
 <p>
   <strong>Category:</strong>
