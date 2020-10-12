@@ -12,7 +12,7 @@ require "rails_helper"
 # of tools you can use to make these specs even more expressive, but we're
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
-RSpec.describe "Api::V1::Customers", type: :request do
+RSpec.describe "Customers", type: :request do
   describe "GET /index" do
     subject{get(customers_path)}
       let(:user){create(:user)}
@@ -22,9 +22,13 @@ RSpec.describe "Api::V1::Customers", type: :request do
       end
     fit "current_userのお客様が一覧が取得できる。" do
       subject
-      # binding.pry
+      binding.pry
       expect(customer1.user_id).to eq user.id
       expect(customer1.category_id).to eq category.id
+      expect(customer2.user_id).to eq user.id
+      expect(customer2.category_id).to eq category.id
+      expect(customer3.user_id).to eq user.id
+      expect(customer3.category_id).to eq category.id
     end
   end
 
