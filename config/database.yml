@@ -15,18 +15,18 @@
 # gem 'pg'
 #
 default: &default
-  adapter: postgresql
-  encoding: unicode
+  adapter: mysql2
+  encoding: utf8
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  pool: 5
   username: root
-  password: root
-  host: 127.0.0.1
+  password: rootroot
+  host: wonderful-nurcing-devise.cl8ucse9occa.ap-northeast-1.rds.amazonaws.com
 
 development:
   <<: *default
-  database: wonderful_nurcing_devise_development
+  database: wondeful_nurcing_devise_development
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -84,5 +84,5 @@ test:
 production:
   <<: *default
   database: wonderful_nurcing_devise_production
-  username: wonderful_nurcing_devise
-  password: <%= ENV['WONDERFUL_NURCING_DEVISE_DATABASE_PASSWORD'] %>
+  username: root
+  password: rootroot
