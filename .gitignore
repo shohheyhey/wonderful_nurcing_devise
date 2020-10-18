@@ -75,3 +75,6 @@ yarn-debug.log*
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+
+#AWS key_pair
+wonderful_nurcing.pem
